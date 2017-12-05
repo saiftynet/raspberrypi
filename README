@@ -1,0 +1,220 @@
+#       This program is free software; you can redistribute it and/or modify
+#       it under the terms of the GNU General Public License as published by
+#       the Free Software Foundation; either version 2 of the License, or
+#       (at your option) any later version.
+#       
+#       This program is distributed in the hope that it will be useful,
+#       but WITHOUT ANY WARRANTY; without even the implied warranty of
+#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#       GNU General Public License for more details.
+#       
+#       You should have received a copy of the GNU General Public License
+#       along with this program; if not, write to the Free Software
+#       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#       MA 02110-1301, USA.
+#     
+#       Author: Saif Ahmed
+#       Contact: saiftynet{at}gmail{dot}com
+#	Please report bugs to me at above email adress.
+#       FileName: piStatus.pl
+#       FileName: piGears.pl    
+
+INSTALLATION
+
+0) Make sure you have all pre-requisites.  Check out http://goo.gl/uHRZq
+
+1) Extract the files (you probably have already done this if you are reading this)
+2) Copy the attached piStatus.pl and piGears.pl files to the cgi-bin directory
+3) Make them executable
+4) Done!
+
+At first run, piStatus will try and make a folder called scripts in the
+document root.  This may fail if permissions are not set to allow this
+(www-data or what ver the web server user is has to be allowed to write to
+document root).  If such a folder exists, piStatus will try and use this
+directory.  If this is not desired, set the folder you wish to use in
+piStatus.pl.
+
+A password is required to run shell commands.  The default is "secret"
+without quotes.  Change this in the script to one you want.
+
+Changes in version 0.14
+    
+    Fixed bug in FileManager->View file that had crept in (newlines not handled correctly)
+    Introduced an initialise button on GPIO tab, to reset all pins to in/pullup
+    Improved i2c device view/get/set interface
+    Added Groups to System > Diagnostic
+    Auto Indent on Filemanager>View scr files
+
+    piGears is now at version 0.7
+    FIO added to reduce logging during GPIO...
+    EXPORTIO and FASTOUTM commands added; faster IO
+    SHELL added to have direct access to shell commands from piGears
+    Fixed bug in IF..ELSEIF..ELSE that crept in during optimisation
+    ORIGIN and SCALE to complement PLOT function
+
+Changes in version 0.13
+    
+    Error in script folder identification when this is not in document root fixed
+      (Thanks little brownmouse)
+    Autodetect whether vcgencmd installed but www-data can not access
+    Started I2C controller: - depends on i2c-tools and the built-in i2c driver
+    Identify and list i2c devices on both buses
+    These devices can be named and info stored to ease use
+    Parameters can be passed and results viewed directly on the pi 
+     
+    piGears now at version 0.6
+    Parameter passing of numbers and strings improved
+    Context dependant comparators as per PERL (== is not eq)
+    Reduced logging to improve performance
+    Optimised handling of ELSIF 
+
+Changes in version 0.12
+    
+    File Manager now allows folder, creation, opening, deletion
+    Files can be moved by renaming the file to include directory path
+    Filemanager has a bread-crumb directory traversal in many views
+    File editting has a "Save As" option
+    Fixed error caused by variable ENV{"DOCUMENT_ROOT"} reporting across systems
+     
+    piGears now at version 0.5
+    Logging can now be disabled to improve performance save on SD writes
+    piGears Menu can be disabled
+    INCLUDE allows code reuse, integrating a preprocessed script into runcode
+    LIBRARY in first line puts resulting processed script into the lib folder
+    PUSH and POP data from a data stack...to allow parameter passing
+    Improvements of array handling...still incomplete
+    
+Changes in version 0.11
+    
+    Diagnostics included to see if piStatus has been configured correctly
+    Partial fix of divide by zero error in some systems (System > Memory)
+    Shell history modifications (show last command entered in history)
+    System > dmesg error fixed
+    
+    piGears now at version 0.4
+    Logging can now be disabled to improve performance save on SD writes
+    
+Changes in version 0.10
+
+    Minor bug fixes and style optimisation
+
+    piGears now allows for some whitespace in formulae
+    Improved handling of formulae
+    Some Array support has been added
+    Multiple pin IO  write/read multiple pins data with one command.
+    LABEL,GOTO, SUB and GOSUB
+    PRINT extended using AT, COLOR, SIZE, ROTATE commands
+    PLOT
+    Math Functions sin, cos, tan, atan, asin, acos, log, sqrt
+
+
+Changes in version 0.9
+
+    Killing processes activated now.
+    Detect if device is connected to WAN (for future implementation of "Update available")
+    reset gpioLogs/chart now possible...this wipes previous logs completely
+    Filemanager now shows filesize
+
+    piGears is NOW at release stage now at 0.2
+    Complete overhaul of line parser so one function parses, checks syntax, handles auto indentation, 
+    Flow control is better now, IF..ELSE..ELSE IF, WHILE, TIMES
+    Logging of IO changes...now can view changes using the Chart or pop Out in piStatus
+    Parsing strings now possible to a limited extent, semicolons need to be escaped.
+    Execution reulta in a 3 tabbed output containing Listing Logs and Console
+    Execution logs have a 10k limit.
+    Default view post execution is the Console...if Console is empty, Logs are shown.
+
+Changes in version 0.8
+
+    Shell Commands history now available
+    Clicking on a command in the history allows re-execution of the command or correcting any typos
+    Cosmetic changes to the shell
+    gpioTable function altered so that it forces a reread of input pins
+        
+    piGears is still to be considered pre-release stage, still needs a lot of work
+    Flow control is better now, 
+    Listing and logging and execution accessible from a tabbed menu
+    Better logging to allow debugging of the iterpreter and the script.
+    Includes a console for PRINT outputs
+    Tests validity of pins (autodetects board revision)
+    Does not yet update gpioLogs...
+
+
+
+Changes in version 0.7
+
+    processes now allows you to see more details, by clicking on the pid. 
+    logs unique IPs that connect to the pi
+    Scriptmanager now allows renaming of files
+    New File and Rename now has file name validation 
+    shell authentication functions moved serverside
+    GPIO Logs only updated if there is a change now
+    GPIO Charting bug (used to print chart backwards!) fixed
+    CSV export improved and saves a csv file in the script folder
+    After saving option to re-edit, and if pgl or scr file, option to execute
+
+    piGear remains in pre-release, but now has improved features
+    Auto indent, colour coded listing, more fluid 
+  
+
+
+Changes in version 0.6
+
+    Upload File activated
+    Changes to the way scriptmanager handles files with known extensions.
+        i.e. HTML and image files are viewed as appropriate, and only pgl
+        and scr (piGears files) are executable
+    CSS Bar charts for memory, an idea borrowed from Kevin "Keschy"
+    Process tree now tries to tidy up many processes that look the same
+    Process tree and also identifies users connected
+       Future version will include ability to kill runaway piGears scripts
+    More of the look and feel now can be managed by CSS file
+    piGears if integrated has a script pre-processor.  This is still iunder development,
+       but is included so you can see how it might work in the future
+
+
+
+Changes in version 0.5
+
+    A task viewer using pstree is now in system menu
+    Webserver environment variables now included in system menu
+    Script manager now recognises pgl extension as executable and on execution calls the piGears interpreter
+    Shell command improved
+    Return of the GPIO Chart now in a colour coded table format
+    Export GPIO collected data as csv 
+
+Changes in version 0.4
+
+    Security Issue 1) prevent access to cgi-bin
+    Security Issue 2) block system command chmod
+    Security Issue 3) hide log files (still accessible through shell)
+    Compatibility with IE; previous versions rendered poorly and GPIO control did not work
+    Prevent creation of hidden files from script manager
+    Fix bug that causes incorrect stats from top;
+    Add "dmesg | tail" to system menu
+    User can alter appearance by creating custom css file. Without this file, piStatus will use a default set of values 
+
+Changes in version 0.3
+
+    Reduce requests for password for shell access once granted
+    Internal databaseless logging infrastructure.
+    Simple logging of IO states,
+    Partial file type detection, allows editing of HTML documents with piStatus, which are saved in the script folder, for Execution. This is a precursor to Scriptable modules.
+    Use vcgencmd (if installed) to display temperature, clocks and codecs
+    Better start up info
+    Debug mode (use {host}/cgi-bin/piStatus.pl?debug=on 
+
+Changes in version 0.2
+
+    Fixed error in pin outs
+    Password restrict shell access
+    Auto detect board revisions and change pin outs accordingly
+    Auto create script folder
+    enhance file manager to prevent writing to gpioFile
+    shell access starts in scripts directory rather than cgi-bin directory
+    Display board revision in system info display 
+
+
+
+
